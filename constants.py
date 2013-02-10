@@ -62,3 +62,14 @@ INITSPEED = 0.15
 
 WALL_KILL = False  # Set to True if you want running into walls to mean
                    # Game Over.
+
+CONTROL_KEYS = {LEFT: 'h', DOWN: 'j', UP: 'k', RIGHT: 'l'}
+# While the arrow keys will always be switched on, you can set up an
+# additional set of keys to control the snake.
+# The default alternative is "HJKL", but if you want to use something
+# else, such as "WASD", or your keyboard layout is'nt QWERTY,
+# (dvorak, for example) then you can set it up here.
+# An example for an alternative mapping, might be:
+# CONTROL_KEYS = {LEFT: 'h', DOWN: 't', UP: 'n', RIGHT: 's'}
+# Which is is "HJKL" remapped for dvorak, so that your hands are still
+# on the home row.

@@ -6,14 +6,15 @@ import flow_control
 import display_utils
 import misc_utils
 import classes
-import constants
 import intro
+from constants import WINHEIGHT, WINWIDTH, INITPOS, INITLENGTH
+from constants import RIGHT, LEFT, UP, DOWN, CONTROL_KEYS
 
-# Note: In curses, positions are 'y,x', instead of 'x,y'
+# NB: In curses, positions are 'y,x', instead of 'x,y'
 
 
 def main(stdscreen):
-    window = curses.newwin(constants.WINHEIGHT, constants.WINWIDTH, 1, 0)
+    window = curses.newwin(WINHEIGHT, WINWIDTH, 1, 0)
 
     curses.curs_set(0)  # Invisible cursor
     curses.use_default_colors()
@@ -23,10 +24,10 @@ def main(stdscreen):
     intro.splash(window)
     while True:
         # The setup for a new game
-        snake = classes.Snake(constants.INITPOS, constants.INITLENGTH)
+        snake = classes.Snake(INITPOS, INITLENGTH)
         apple = classes.Apple(snake)
         score = 0
-        direction = constants.RIGHT
+        direction = RIGHT
         display_utils.set_up_scr(stdscreen, window)
         snake.update(window, True)
         apple.update(window)
@@ -37,14 +38,14 @@ def main(stdscreen):
         while True:  # The game loop
             # Event handling
             ch = window.getch()
-            if ch == curses.KEY_LEFT or ch == ord('h'):
-                direction = constants.LEFT
-            elif ch == curses.KEY_RIGHT or ch == ord('l'):
-                direction = constants.RIGHT
-            elif ch == curses.KEY_UP or ch == ord('k'):
-                direction = constants.UP
-            elif ch == curses.KEY_DOWN or ch == ord('j'):
-                direction = constants.DOWN
+            if ch == curses.KEY_LEFT or ch == ord(CONTROL_KEYS[LEFT]):
+                direction = LEFT
+            elif ch == curses.KEY_RIGHT or ch == ord(CONTROL_KEYS[RIGHT]):
+                direction = RIGHT
+            elif ch == curses.KEY_UP or ch == ord(CONTROL_KEYS[UP]):
+                direction = UP
+            elif ch == curses.KEY_DOWN or ch == ord(CONTROL_KEYS[DOWN]):
+                direction = DOWN
             elif ch == ord('q'):
                 if flow_control.confirm_quit(window):
                     break
