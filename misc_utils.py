@@ -12,10 +12,11 @@ import curses
 
 # Custom modules
 import flow_control
+from constants import INITSPEED
 
 
 def calc_speed(length):
-    return int(150 - (length / 5 + length) / 10 % 120)
+    return int(INITSPEED - (length / 5 + length) / 10 % 120)
 
 
 def timer():

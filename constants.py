@@ -58,7 +58,7 @@ assert (INITPOS[1] - INITLENGTH > 0 and
         'INITPOS - INITLENGTH goes outside the window')
 
 # Intial speed, in seconds
-INITSPEED = 0.15
+INITSPEED = 150
 
 WALL_KILL = False  # Set to True if you want running into walls to mean
                    # Game Over.
