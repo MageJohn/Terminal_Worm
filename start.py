@@ -60,7 +60,6 @@ def main(stdscreen):
                 break
 
             snake.update(window)
-            window.refresh()
 
             if snake.pos_list[0] == apple.pos:
                 snake.extend()
@@ -70,11 +69,13 @@ def main(stdscreen):
                 display_utils.display_score(score, stdscreen)
 
                 stdscreen.refresh()
-                window.refresh
 
             # There's a bug that means a section of the border can be
             # overwritten. This is a quick fix:
             display_utils.border(window)
+            # TODO: See if there might be a more efficient method,
+            #       hopefully prevent the overwrite from happening.
+
             window.refresh()
 
             window.timeout(misc_utils.calc_speed(snake.length))
@@ -83,5 +84,6 @@ def main(stdscreen):
             break
 
 curses.wrapper(main)
-print('See you soon!')  # When we get to this point, it means the game
-                        # finished
+
+# curses.wrapper cleans up for us, so all that's left to do is:
+print('See you soon!')
