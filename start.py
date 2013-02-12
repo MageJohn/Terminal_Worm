@@ -7,7 +7,7 @@ import display_utils
 import misc_utils
 import classes
 import intro
-from constants import WINHEIGHT, WINWIDTH, INITPOS, INITLENGTH
+from constants import WINHEIGHT, WINWIDTH, INITPOS, INITLENGTH, INITSPEED
 from constants import RIGHT, LEFT, UP, DOWN, CONTROL_KEYS
 
 # NB: In curses, positions are 'y,x', instead of 'x,y'
@@ -28,9 +28,12 @@ def main(stdscreen):
         apple = classes.Apple(snake)
         score = 0
         direction = RIGHT
+
         display_utils.set_up_scr(stdscreen, window)
         snake.update(window, True)
         apple.update(window)
+
+        window.timeout(INITSPEED)
 
         stdscreen.refresh()
         window.refresh()
