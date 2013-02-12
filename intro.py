@@ -1,6 +1,5 @@
 import itertools
 import random
-import time
 
 SNAKE_ANIM_START = '''\
              .-.  
