@@ -68,17 +68,17 @@ def main(stdscreen):
                 score += 1
                 display_utils.display_score(score, stdscreen)
 
+                window.timeout(misc_utils.calc_speed(snake.length))
+
                 stdscreen.refresh()
 
             # There's a bug that means a section of the border can be
             # overwritten. This is a quick fix:
             display_utils.border(window)
             # TODO: See if there might be a more efficient method,
-            #       hopefully prevent the overwrite from happening.
+            #       hopefully prevent the overwrite from happening at all.
 
             window.refresh()
-
-            window.timeout(misc_utils.calc_speed(snake.length))
 
         if ch == ord('q') or not flow_control.play_again(score, window):
             break
