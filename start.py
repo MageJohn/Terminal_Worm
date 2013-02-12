@@ -25,7 +25,7 @@ def main(stdscreen):
     while True:
         # The setup for a new game
         snake = classes.Snake(INITPOS, INITLENGTH)
-        apple = classes.Apple(snake)
+        apple = classes.Apple(snake, window)
         score = 0
         direction = RIGHT
 
@@ -66,7 +66,7 @@ def main(stdscreen):
 
             if snake.pos_list[0] == apple.pos:
                 snake.extend()
-                apple.new_pos(snake)
+                apple = classes.Apple(snake, window)
                 apple.update(window)
                 score += 1
                 display_utils.display_score(score, stdscreen)
