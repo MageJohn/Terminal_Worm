@@ -5,9 +5,8 @@ They are:
   - the apple class
 '''
 
-import random
-
 import constants
+import misc_utils
 
 
 class Snake:
@@ -173,24 +172,12 @@ class Apple:
 A snake structure is needed, so that the new_pos function can check
 for any overlap between the snake and the apple.
     '''
-    def __init__(self, snake):
-            self.new_pos(snake)
+    def __init__(self, snake, window):
+            pos_exclude_list = snake.pos_list
+            self.pos = misc_utils.get_random_pos(window, pos_exclude_list)
 
     def update(self, window):
         '''
 Writes the apple to the screen
         '''
         window.addstr(self.pos[0], self.pos[1], constants.APPLECHR)
-
-    def new_pos(self, snake):
-        '''
-Generates a new position for the apple.
-Used by __init__.
-        '''
-        while True:
-                self.pos = [random.randrange(1, constants.WINHEIGHT - 1),
-                            random.randrange(1, constants.WINWIDTH - 1)]
-                if self.pos in snake.pos_list:
-                    continue
-                else:
-                    break

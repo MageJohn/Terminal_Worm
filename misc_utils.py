@@ -9,6 +9,7 @@ They are:
 # Standard library modules
 import time
 import curses
+import random
 
 # Custom modules
 import flow_control
@@ -127,3 +128,17 @@ Have fun!
     dialogue(window, command_help, {' ': None})
     dialogue(window, gameplay_help, {' ': None})
     flow_control.countdown(window)
+
+
+def get_random_pos(win, exclude_list=(None,)):
+    '''
+Returns a random positon in win, that is not in exclude_list
+    '''
+    while True:
+        random_pos = [random.randrange(1, win.getmaxyx()[0] - 1),
+                    random.randrange(1, win.getmaxyx()[1] - 1)]
+        if random_pos in exclude_list:
+            continue
+        else:
+            break
+    return random_pos
