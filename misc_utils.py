@@ -13,7 +13,8 @@ import random
 
 # Custom modules
 import flow_control
-from constants import INITSPEED
+from constants import INITSPEED, CONTROL_KEYS
+from constants import UP, DOWN, LEFT, RIGHT
 
 
 def calc_speed(length):
@@ -95,9 +96,9 @@ def help(window):
     command_help = """
 Commands
 
-      k          
-Use h + l  or the
-      j          
+      %s           
+Use %s + %s  or the
+      %s           
 arrow keys for movement
 
 'p': Pause
@@ -107,9 +108,10 @@ arrow keys for movement
 '?': This help text
 
 --Press space--
-                """
+                """ % (CONTROL_KEYS[UP], CONTROL_KEYS[LEFT],
+                       CONTROL_KEYS[RIGHT], CONTROL_KEYS[DOWN])
 
-    gameplay_help = """
+    gameplay_help_1 = """
 Gameplay
 
 Run around and eat the apples.
@@ -117,22 +119,42 @@ As you eat, you'll grow longer,
 but be careful! Running into yourself,
 or going backwards means Game Over.
 
-The higher your score,
-the faster you'll go.
+The higher your score, the faster
+you'll go.
 
-Have fun!
+Every now and again though.
+you'll get a bonus...
 
 --Press space--
     """
 
+    gameplay_help_2 = """
+Bugs
+
+Bugs are a delicious treat,
+for which you'll get extra points!
+If you see one, try and get to it
+as quickly as possible.
+There's a counter, and if it
+reaches 0, the bug runs away.
+But if you do catch it, then
+the rest of the timer
+will be added to your score!
+
+That's it. I hope you have fun!
+
+--Press space--
+"""
+
     dialogue(window, command_help, {' ': None})
-    dialogue(window, gameplay_help, {' ': None})
+    dialogue(window, gameplay_help_1, {' ': None})
+    dialogue(window, gameplay_help_2, {' ': None})
     flow_control.countdown(window)
 
 
 def get_random_pos(win, exclude_list=(None,)):
     '''
-Returns a random positon in win, that is not in exclude_list
+Returns a random position in win, that is not in exclude_list
     '''
     while True:
         random_pos = [random.randrange(1, win.getmaxyx()[0] - 1),

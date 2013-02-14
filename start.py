@@ -25,9 +25,11 @@ def main(stdscreen):
     while True:
         # The setup for a new game
         snake = classes.Snake(INITPOS, INITLENGTH)
-        apple = classes.Apple(snake, window)
+        bug = None
+        apple = classes.Apple(snake, bug, window)
         score = 0
         direction = RIGHT
+        no_new_bug = False
 
         display_utils.set_up_scr(stdscreen, window)
         snake.update(window, True)
@@ -66,14 +68,45 @@ def main(stdscreen):
 
             if snake.pos_list[0] == apple.pos:
                 snake.extend()
-                apple = classes.Apple(snake, window)
+                apple = classes.Apple(snake, bug, window)
                 apple.update(window)
                 score += 1
+                no_new_bug = False
                 display_utils.display_score(score, stdscreen)
 
-                window.timeout(misc_utils.calc_speed(snake.length))
+            # Start bug code :-)
+            # ====================
 
-                stdscreen.refresh()
+            if bug is not None:
+                bug.timeout -= 1
+                if bug.timeout < 0:
+                    bug.remove(window, stdscreen)
+                    bug = None
+                    no_new_bug = True
+                else:
+                    bug.display_timer(stdscreen)
+
+            if bug is not None:
+                # We check two separate times if bug is not None,
+                # because the first time has the possibility of
+                # changing bugs value.
+                if snake.pos_list[0] == bug.pos:
+                    snake.extend()
+                    score += bug.timeout
+                    no_new_bug = False
+                    display_utils.display_score(score, stdscreen)
+                    bug.remove(window, stdscreen, True)
+                    bug = None
+
+            if (not no_new_bug and
+                    snake.length > INITLENGTH + 1 and
+                    snake.length % 5 == 0 and bug is None):
+                bug = classes.Bug(window, stdscreen, snake, apple)
+                bug.write(window)
+                bug.display_timer(stdscreen)
+
+            # ====================
+            # End bug code
 
             # There's a bug that means a section of the border can be
             # overwritten. This is a quick fix:
@@ -82,6 +115,9 @@ def main(stdscreen):
             #       hopefully prevent the overwrite from happening at all.
 
             window.refresh()
+            stdscreen.refresh()
+
+            window.timeout(misc_utils.calc_speed(snake.length))
 
         if ch == ord('q') or not flow_control.play_again(score, window):
             break

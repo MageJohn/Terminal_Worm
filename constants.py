@@ -79,3 +79,7 @@ CONTROL_KEYS = {LEFT: 'h', DOWN: 'j', UP: 'k', RIGHT: 'l'}
 # CONTROL_KEYS = {LEFT: 'h', DOWN: 't', UP: 'n', RIGHT: 's'}
 # Which is is "HJKL" remapped for dvorak, so that your hands are still
 # on the home row.
+
+BUG_CHRS = ('#', '~', '%', '∞', '§', '≈', '¥', '∑')
+BUG_TIMEOUT_RANGE = (20, 30)
+BUG_TIMER_POS = [0, WINWIDTH - 17]

@@ -8,6 +8,8 @@ They are:
 import constants
 import misc_utils
 
+import random
+
 
 class Snake:
     '''
@@ -112,7 +114,7 @@ screen. Otherwise it will write only the changes made by the move method.
             # We'll start by dealing with old tails.
             # If the snake has been extended,
             # then we leave the part on the screen, otherwise,
-            # we overwite with a space
+            # we overwrite with a space
 
             if self.length == len(self.old_pos):
                 y, x = self.old_pos[-1]
@@ -158,22 +160,29 @@ else returns False
         if window.inch(
                 self.pos_list[0][0],
                 self.pos_list[0][1]) == ord(constants.WALLCHR):
+            # This is currently not really needed, but a planned
+            # feature is mazes, and they will use WALLCHR.
+            # The reason this is here now is because an early version
+            # of the game had walls with WALLCHR.
             return True
 
         return False
 
 
 class Apple:
-    '''This is the class for the apple.
-    It's methods are:
-      - update
-      - new_pos (used by __init__)
-
-A snake structure is needed, so that the new_pos function can check
-for any overlap between the snake and the apple.
     '''
-    def __init__(self, snake, window):
-            pos_exclude_list = snake.pos_list
+This is the class for the apple.
+It's methods are:
+  - update
+  - new_pos (used by __init__)
+
+Instances of a snake and a bug are needed, so that the new_pos function
+can check for any overlap between the snake and the apple.
+    '''
+    def __init__(self, snake, bug, window):
+            pos_exclude_list = snake.pos_list[:]
+            if bug != None:
+                pos_exclude_list.append(bug.pos)
             self.pos = misc_utils.get_random_pos(window, pos_exclude_list)
 
     def update(self, window):
@@ -181,3 +190,36 @@ for any overlap between the snake and the apple.
 Writes the apple to the screen
         '''
         window.addstr(self.pos[0], self.pos[1], constants.APPLECHR)
+
+
+class Bug:
+    """The bug class
+It's methods are:
+  - write
+  - display_timer
+  - remove"""
+    def __init__(self, window, stdscr, snake, apple):
+        pos_exclude_list = snake.pos_list + apple.pos
+        self.pos = misc_utils.get_random_pos(window, pos_exclude_list)
+
+        self.bug_chr = random.choice(constants.BUG_CHRS)
+        self.timeout = random.randrange(*constants.BUG_TIMEOUT_RANGE)
+
+    def write(self, window):
+        """Writes the bug to the window"""
+        window.addstr(self.pos[0], self.pos[1], self.bug_chr)
+
+    def display_timer(self, stdscr):
+        '''Shows the timer in the statusbar'''
+        stdscr.addstr(constants.BUG_TIMER_POS[0], constants.BUG_TIMER_POS[1],
+            '%s %s ' % (self.bug_chr, self.timeout))
+
+    def remove(self, window, stdscr, no_window_overwrite=False):
+        '''Removes the bug and the counter.
+If no_window_overwrite is True, then the bug isn't removed from the
+window. This is used for when the bug is eaten, and we don't want the
+head of the snake overwritten '''
+        if not no_window_overwrite:
+            window.addstr(self.pos[0], self.pos[1], ' ')
+        stdscr.addstr(constants.BUG_TIMER_POS[0], constants.BUG_TIMER_POS[1],
+            '    ')
