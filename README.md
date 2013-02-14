@@ -7,7 +7,7 @@ The aim is to have as many features as possible, while still making the
 game simple and fun to play.
 
 Features
-=============
+-------------
 
 - A splash animation at the start
 
@@ -21,7 +21,7 @@ Features
 - Bonuses. Little bugs that come on screen, and give extra points
 
 TODO
-==============
+-------------
 
 - Highscores
 
