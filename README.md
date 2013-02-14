@@ -18,14 +18,14 @@ Features
 - Configurable. Many aspects of the game can be changed in the
   constants.py file
 
+- Bonuses. Little bugs that come on screen, and give extra points
+
 TODO
 ==============
 
 - Highscores
 
-- Bonus food, similar to Nokia's Snake II
-
-- Mazes, ditto
+- Mazes, similar to Nokia's Snake II
 
 - Colors
 
