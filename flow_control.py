@@ -45,12 +45,12 @@ window should be a curses window object.
 
     dialogue_text = '''G A M E  O V E R
 You got %s point%s!
-Press 'q' to quit
-Any other key to play again''' % (int(score), s)
+Press 'q' to quit, or 'p'
+to play again''' % (int(score), s)
 
     while True:
         answer = dialogue(window, dialogue_text,
-            {'q': 'quit', None: 'play again'})
+            {'q': 'quit', 'p': 'play again'})
 
         if answer == 'quit':
             if confirm_quit(window):
