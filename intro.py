@@ -28,9 +28,9 @@ and waits for a keypress
     snake_lines = SNAKE_ANIM_START.split('\n')
     snake_num_lines = len(snake_lines)
 
-    start_y = int((window.getmaxyx()[0] / 2) - ((snake_num_lines + 4) / 2))
+    start_y = int((window.getmaxyx()[0] / 2) - ((snake_num_lines + 5) / 2))
     # The above line helps to ensure that the art is centered.
-    # The four added to snake_num_lines is to make space for the name
+    # The five added to snake_num_lines is to make space for the name
     # and an instruction on how to start the game
 
     start_x = 1
@@ -42,9 +42,12 @@ and waits for a keypress
         window.addstr(int(start_y + i), start_x, line.center(line_length))
 
     window.addstr(int(start_y + snake_num_lines) + 2, 1,
-        'W O R M Y'.center(line_length))
+        'T E R M I N A L'.center(line_length))
 
-    window.addstr(int(start_y + snake_num_lines + 4), 1,
+    window.addstr(int(start_y + snake_num_lines) + 3, 1,
+        'W O R M'.center(line_length))
+
+    window.addstr(int(start_y + snake_num_lines + 5), 1,
         '(press any key to start)'.center(line_length))
 
     # The two lines below are chock full of a magic numbers.
