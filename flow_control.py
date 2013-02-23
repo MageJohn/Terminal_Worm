@@ -18,7 +18,7 @@ Pauses execution of the game.
 Gives the user a message, waits for input, then counts down from 3
 window should be a curses window object.
     '''
-    dialogue(window, 'P A U S E D\npress any key', {None: None})
+    dialogue(window, ['P A U S E D', 'press any key'], {None: None})
     countdown(window)
 
 
@@ -28,7 +28,7 @@ Asks the user to confirm whether they want to quit.
 Returns True if they do, otherwise returns False.
 window should be a curses window object.
     '''
-    return dialogue(window, 'Really quit?\n(y/n)')
+    return dialogue(window, ['', 'Really quit?\n(y/n)'])
 
 
 def play_again(score, window):
@@ -43,13 +43,13 @@ window should be a curses window object.
     else:
         s = 's'
 
-    dialogue_text = '''G A M E  O V E R
+    dialogue_text = '''\
 You got %s point%s!
 Press 'q' to quit, or 'p'
 to play again''' % (int(score), s)
 
     while True:
-        answer = dialogue(window, dialogue_text,
+        answer = dialogue(window, ['G A M E  O V E R', dialogue_text],
             {'q': 'quit', 'p': 'play again'})
 
         if answer == 'quit':
