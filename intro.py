@@ -1,6 +1,8 @@
 import itertools
 import random
 
+import display_utils
+
 SNAKE_ANIM_START = '''\
              .-.  
             /  aa 
@@ -24,7 +26,7 @@ def splash(window):
 Puts an animation in the middle of the passed window,
 and waits for a keypress
     '''
-    window.border(0)
+    display_utils.border(window)
     snake_lines = SNAKE_ANIM_START.split('\n')
     snake_num_lines = len(snake_lines)
 

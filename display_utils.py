@@ -27,5 +27,5 @@ def display_score(score, stdscreen):
                      str(int(score)))
 
 
-def border(window, border_chr=0):
-    window.border(*([border_chr] * 8))
+def border(window):
+    window.border('|', '|', '-', '-', '+', '+', '+', '+')
