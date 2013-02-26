@@ -9,7 +9,7 @@ Included in this module are:
 
 import curses
 import time
-from misc_utils import dialogue
+from dialogue import dialogue
 
 
 def pause(window):
@@ -18,7 +18,7 @@ Pauses execution of the game.
 Gives the user a message, waits for input, then counts down from 3
 window should be a curses window object.
     '''
-    dialogue(window, ['P A U S E D', 'press any key'], {None: None})
+    dialogue(window, ['P A U S E D', 'press any key'], [{}, ['Start', None]])
     countdown(window)
 
 
@@ -50,7 +50,7 @@ to play again''' % (int(score), s)
 
     while True:
         answer = dialogue(window, ['G A M E  O V E R', dialogue_text],
-            {'q': 'quit', 'p': 'play again'})
+            [{}, ['Play again', 'playagain'], ['Exit', 'quit']])
 
         if answer == 'quit':
             if confirm_quit(window):
@@ -71,7 +71,7 @@ Pauses execution.
     for i in range(start, 0, -1):
         countdown_win.addstr(0, 0, str(i), curses.A_BOLD)
         countdown_win.refresh()
-        time.sleep(1)
+        time.sleep(0.5)
     del countdown_win
     window.touchwin()
     window.refresh()

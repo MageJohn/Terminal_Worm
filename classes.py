@@ -122,7 +122,7 @@ screen. Otherwise it will write only the changes made by the move method.
                 # before the move method was called
                 window.addstr(y, x, ' ')
 
-            # Now we overwrite the old head with a body part (an 'o')
+            # Now we overwrite the old head with a body part
             y, x = self.old_pos[0]
             # self.old_pos[0] is the position of the
             # head before the move method was called
@@ -157,14 +157,15 @@ else returns False
                     self.pos_list[0][1] == constants.WINWIDTH):
                 return True
 
-        if window.inch(
-                self.pos_list[0][0],
-                self.pos_list[0][1]) == ord(constants.WALLCHR):
-            # This is currently not really needed, but a planned
-            # feature is mazes, and they will use WALLCHR.
-            # The reason this is here now is because an early version
-            # of the game had walls with WALLCHR.
-            return True
+        # This is currently not really needed, but a planned
+        # feature is mazes, and they will use WALLCHR.
+        # The reason this is here now is because an early version
+        # of the game had walls with WALLCHR.
+
+        #if window.inch(
+        #        self.pos_list[0][0],
+        #        self.pos_list[0][1]) == ord(constants.WALLCHR):
+        #    return True
 
         return False
 
@@ -174,10 +175,10 @@ class Apple:
 This is the class for the apple.
 It's methods are:
   - update
-  - new_pos (used by __init__)
 
 Instances of a snake and a bug are needed, so that the new_pos function
-can check for any overlap between the snake and the apple.
+can check for any overlap between the other objects on the screen and
+the apple.
     '''
     def __init__(self, snake, bug, window):
             pos_exclude_list = snake.pos_list[:]
@@ -221,5 +222,6 @@ window. This is used for when the bug is eaten, and we don't want the
 head of the snake overwritten '''
         if not no_window_overwrite:
             window.addstr(self.pos[0], self.pos[1], ' ')
+
         stdscr.addstr(constants.BUG_TIMER_POS[0], constants.BUG_TIMER_POS[1],
             '    ')
