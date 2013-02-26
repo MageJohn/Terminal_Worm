@@ -16,6 +16,11 @@ They are:
   - INITPOS
   - INITLENGTH
   - INITSPEED
+  - WALL_KILL
+  - CONTROL_KEYS
+  - BUG_CHRS
+  - BUG_TIMEOUT_RANGE
+  - BUG_TIMER_POS
 '''
 
 # Direction constants
@@ -81,5 +86,5 @@ CONTROL_KEYS = {LEFT: 'h', DOWN: 'j', UP: 'k', RIGHT: 'l'}
 # on the home row.
 
 BUG_CHRS = ('#', '~', '%', '∞', '§', '≈', '¥', '∑')
-BUG_TIMEOUT_RANGE = (20, 30)
+BUG_TIMEOUT_RANGE = (30, 40)
 BUG_TIMER_POS = [0, WINWIDTH - 17]
