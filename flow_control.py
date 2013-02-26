@@ -28,7 +28,7 @@ Asks the user to confirm whether they want to quit.
 Returns True if they do, otherwise returns False.
 window should be a curses window object.
     '''
-    return dialogue(window, ['', 'Really quit?\n(y/n)'])
+    return dialogue(window, ['', 'Really quit?'])
 
 
 def play_again(score, window):
@@ -45,8 +45,7 @@ window should be a curses window object.
 
     dialogue_text = '''\
 You got %s point%s!
-Press 'q' to quit, or 'p'
-to play again''' % (int(score), s)
+    ''' % (int(score), s)
 
     while True:
         answer = dialogue(window, ['G A M E  O V E R', dialogue_text],

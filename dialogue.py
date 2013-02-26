@@ -122,7 +122,7 @@ Currently having only hotkeys, and no menu items, isn't supported.
     dialogue.addstr(0, 0, ''.join(['+', dialogue_title, '+']),
         curses.A_REVERSE | curses.A_BOLD)
 
-    for i, s in enumerate(body_text, 1):
+    for i, s in enumerate(body_text, 2):
         dialogue.addstr(i, 1, s.center(width - 2))
 
     menu_y = len(body_text) + 3
@@ -142,7 +142,7 @@ Currently having only hotkeys, and no menu items, isn't supported.
             menu.go_prev()
         if c == curses.KEY_DOWN:
             menu.go_next()
-        if c == ord(' ') or c == curses.KEY_ENTER:
+        if c == ord(' ') or c == curses.KEY_ENTER or c == curses.KEY_SELECT:
             selection = menu.get_current()
             break
         else:
