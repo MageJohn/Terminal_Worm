@@ -142,7 +142,7 @@ Currently having only hotkeys, and no menu items, isn't supported.
             menu.go_prev()
         if c == curses.KEY_DOWN:
             menu.go_next()
-        if c == ord(' ') or c == curses.KEY_ENTER or c == curses.KEY_SELECT:
+        if c == ord('\n') or c == curses.KEY_ENTER or c == curses.KEY_SELECT:
             selection = menu.get_current()
             break
         else:
