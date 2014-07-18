@@ -7,8 +7,6 @@ It tracks what is currently selected, and provides
 methods for changing the the current item, returning the current item,
 and returning a list of all items.
 
-Items are _MenuItem instances.
-
 """
     def __init__(self):
         self._menu_items = []
@@ -64,19 +62,17 @@ and of it's position in the list.
 def dialogue(window, text, answer_map=None):
     '''
 Shows a dialogue box to the user.
-The answer map is a list, with the first item a dictionary.
+answer_map is a list, with the first item a dictionary.
 This dictionary should have the keys as the hotkeys,
 (it can take ascii values, or curses provided key constants) and the values
 should be what you expect to be returned.
 
 The rest of the list should be sub-lists, where item [0] is the text to be
-displayed, and item [1] is what you expect to be returnedd
+displayed, and item [1] is what you expect to be returned
 
 The default mapping is this:
 [{}, ['Yes', True], ['No', False]]
 It has no hotkeys, and two options
-
-The use of None as a wildcard isn't supported anymore.
 
 The text argument should be a list or tuple, where text[0] is the title
 of the dialogue box, and text[1] is the body text.
