@@ -1,4 +1,21 @@
+'''Terminal Worm: A remake of the classic Snake game
+    Copyright (C) 2012, 2013  Yuri Pieters
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+'''
 # Standard library modules
+from __future__ import print_function
 import curses
 
 # Custom modules
@@ -14,12 +31,13 @@ from constants import RIGHT, LEFT, UP, DOWN, CONTROL_KEYS
 
 
 def main(stdscreen):
+    '''The main function. This is where things happen!'''
     window = curses.newwin(WINHEIGHT, WINWIDTH, 1, 0)
 
     curses.curs_set(0)  # Invisible cursor
     curses.use_default_colors()
     window.keypad(1)  # With this setting on, python will interpret special
-                      # keys, such as arrow keys, or the numpad.
+                      # keys, suchar as arrow keys, or the numpad.
 
     intro.splash(window)
     while True:
@@ -42,21 +60,21 @@ def main(stdscreen):
 
         while True:  # The game loop
             # Event handling
-            ch = window.getch()
-            if ch == curses.KEY_LEFT or ch == ord(CONTROL_KEYS[LEFT]):
+            char = window.getch()
+            if char == curses.KEY_LEFT or char == ord(CONTROL_KEYS[LEFT]):
                 direction = LEFT
-            elif ch == curses.KEY_RIGHT or ch == ord(CONTROL_KEYS[RIGHT]):
+            elif char == curses.KEY_RIGHT or char == ord(CONTROL_KEYS[RIGHT]):
                 direction = RIGHT
-            elif ch == curses.KEY_UP or ch == ord(CONTROL_KEYS[UP]):
+            elif char == curses.KEY_UP or char == ord(CONTROL_KEYS[UP]):
                 direction = UP
-            elif ch == curses.KEY_DOWN or ch == ord(CONTROL_KEYS[DOWN]):
+            elif char == curses.KEY_DOWN or char == ord(CONTROL_KEYS[DOWN]):
                 direction = DOWN
-            elif ch == ord('q'):
+            elif char == ord('q'):
                 if flow_control.confirm_quit(window):
                     break
-            elif ch == ord('p'):
+            elif char == ord('p'):
                 flow_control.pause(window)
-            elif ch == ord('?'):
+            elif char == ord('?'):
                 misc_utils.help(window)
 
             snake.move(direction)
@@ -87,9 +105,9 @@ def main(stdscreen):
                     bug.display_timer(stdscreen)
 
             if bug is not None:
-                # We check two separate times if bug is not None,
+                # We chareck two separate times if bug is not None,
                 # because the first time has the possibility of
-                # changing bugs value.
+                # charanging bugs value.
                 if snake.pos_list[0] == bug.pos:
                     snake.extend()
                     score += bug.timeout
@@ -119,7 +137,7 @@ def main(stdscreen):
 
             window.timeout(misc_utils.calc_speed(snake.length))
 
-        if ch == ord('q') or not flow_control.play_again(score, window):
+        if char == ord('q') or not flow_control.play_again(score, window):
             break
 
 curses.wrapper(main)

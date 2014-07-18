@@ -1,3 +1,20 @@
+'''Terminal Worm: A remake of the classic Snake game
+    Copyright (C) 2012, 2013  Yuri Pieters
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+'''
+
 import itertools
 import random
 
@@ -54,8 +71,8 @@ and waits for a keypress
 
     # The two lines below are chock full of a magic numbers.
     # Here's a little explanation:
-    #                     nlines ncols tail y               tail x
-    tail_win = window.subwin(2,   4,   start_y + 5,   int(line_length / 2 - 8))
+    #                      nlines ncols    tail y            tail x
+    tail_win   = window.subwin(2,   4,   start_y + 5, int(line_length / 2 - 8))
     tongue_win = window.subwin(2,   3,   start_y + 4, int(line_length / 2 + 9))
     # If you want to change the animation, these will have to changed
     # to numbers that fit the your moving parts.
@@ -87,7 +104,7 @@ and waits for a keypress
 def test(stdscr):
     '''This function will be run if we're __main__'''
 
-    window = curses.newwin(24, 80, 0, 0)
+    window = curses.newwin(20, 60, 1, 0)
     curses.curs_set(0)
     splash(window)
 
