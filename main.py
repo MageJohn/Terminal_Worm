@@ -19,6 +19,7 @@
 # Standard library modules
 from __future__ import print_function
 import curses
+import time
 
 # Custom modules
 import flow_control
@@ -26,7 +27,7 @@ import display_utils
 import misc_utils
 import classes
 import intro
-from constants import WINHEIGHT, WINWIDTH, INITPOS, INITLENGTH, INITSPEED
+from constants import WINHEIGHT, WINWIDTH, INITPOS, INITLENGTH
 from constants import RIGHT, LEFT, UP, DOWN, CONTROL_KEYS
 
 # NB: In curses, positions are 'y,x', instead of 'x,y'
@@ -44,6 +45,7 @@ def main(stdscreen):
     window.keypad(1)
 
     intro.splash(window)
+    window.nodelay(1)
     while True:
         # The setup for a new game
         snake = classes.Snake(INITPOS, INITLENGTH)
@@ -57,14 +59,12 @@ def main(stdscreen):
         snake.update(window, True)
         apple.update(window)
 
-        window.timeout(INITSPEED)
-
         stdscreen.refresh()
         window.refresh()
 
         while True:  # The game loop
             # Event handling
-            char = window.getch()
+            char = misc_utils.get_char(window)
             if char == curses.KEY_LEFT or char == ord(CONTROL_KEYS[LEFT]):
                 direction = LEFT
             elif char == curses.KEY_RIGHT or char == ord(CONTROL_KEYS[RIGHT]):
@@ -130,16 +130,10 @@ def main(stdscreen):
             # ====================
             # End bug code
 
-            # There's a bug that means a section of the border can be
-            # overwritten. This is a quick fix:
-            display_utils.border(window)
-            # TODO: See if there might be a more efficient method,
-            #       hopefully prevent the overwrite from happening at all.
-
             window.refresh()
             stdscreen.refresh()
 
-            window.timeout(misc_utils.calc_speed(snake.length))
+            time.sleep(misc_utils.calc_speed(snake.length))
 
         if char == ord('q') or not flow_control.play_again(score, window):
             break
