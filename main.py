@@ -130,6 +130,12 @@ def main(stdscreen):
             # ====================
             # End bug code
 
+            # There's a bug that means a section of the border can be
+            # overwritten. This is a quick fix:
+            display_utils.border(window)
+            # TODO: See if there might be a more efficient method,
+            #       hopefully prevent the overwrite from happening at all.
+
             window.refresh()
             stdscreen.refresh()
 
