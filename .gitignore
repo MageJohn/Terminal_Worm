@@ -2,3 +2,5 @@
 *.pyd
 *.pyo
 __pycache__
+pylintrc
+terminal-worm.sublime-workspace
