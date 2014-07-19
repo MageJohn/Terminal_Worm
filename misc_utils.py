@@ -17,6 +17,7 @@
 
 Various miscellaneous functions.
 They are:
+  - get_char
   - calc_speed
   - timer
   - help
@@ -30,9 +31,22 @@ from constants import INITSPEED, CONTROL_KEYS
 from constants import UP, DOWN, LEFT, RIGHT
 from dialogue import dialogue
 
+def get_char(window):
+    '''Gets a char out of the queue,
+       and then empties it. This stops the
+       queue getting filled with spam if you
+       hold down a button.
+    '''
+    char = window.getch()
+    rest = None
+    while rest != -1:
+        rest = window.getch()
+
+    return char
+
 
 def calc_speed(length):
-    return int(INITSPEED - (length / 5 + length) / 10 % 120)
+    return (INITSPEED - length * 2) / 1000
 
 
 def help(window):
