@@ -1,3 +1,5 @@
+#!/usr/bin/python3.4
+
 '''Terminal Worm: A remake of the classic Snake game
     Copyright (C) 2012, 2013  Yuri Pieters
 
@@ -29,17 +31,6 @@ from constants import RIGHT, LEFT, UP, DOWN, CONTROL_KEYS
 
 # NB: In curses, positions are 'y,x', instead of 'x,y'
 
-def move_handling(char):
-    '''This function handles movement keys'''
-    if char == curses.KEY_LEFT or char == ord(CONTROL_KEYS[LEFT]):
-        return LEFT
-    elif char == curses.KEY_RIGHT or char == ord(CONTROL_KEYS[RIGHT]):
-        return RIGHT
-    elif char == curses.KEY_UP or char == ord(CONTROL_KEYS[UP]):
-        return UP
-    elif char == curses.KEY_DOWN or char == ord(CONTROL_KEYS[DOWN]):
-        return DOWN
-
 
 def main(stdscreen):
     '''The main function. This is where things happen!'''
@@ -47,8 +38,10 @@ def main(stdscreen):
 
     curses.curs_set(0)  # Invisible cursor
     curses.use_default_colors()
-    window.keypad(1)  # With this setting on, python will interpret special
-                      # keys, suchar as arrow keys, or the numpad.
+
+    # With this setting on, python will interpret special
+    # keys, such as arrow keys, or the numpad.
+    window.keypad(1)
 
     intro.splash(window)
     while True:
@@ -72,15 +65,21 @@ def main(stdscreen):
         while True:  # The game loop
             # Event handling
             char = window.getch()
-            direction = move_handling(char)
-            if direction is not None:
-                if char == ord('q'):
-                    if flow_control.confirm_quit(window):
-                        break
-                elif char == ord('p'):
-                    flow_control.pause(window)
-                elif char == ord('?'):
-                    misc_utils.help(window)
+            if char == curses.KEY_LEFT or char == ord(CONTROL_KEYS[LEFT]):
+                direction = LEFT
+            elif char == curses.KEY_RIGHT or char == ord(CONTROL_KEYS[RIGHT]):
+                direction = RIGHT
+            elif char == curses.KEY_UP or char == ord(CONTROL_KEYS[UP]):
+                direction = UP
+            elif char == curses.KEY_DOWN or char == ord(CONTROL_KEYS[DOWN]):
+                direction = DOWN
+            elif char == ord('q'):
+                if flow_control.confirm_quit(window):
+                    break
+            elif char == ord('p'):
+                flow_control.pause(window)
+            elif char == ord('?'):
+                misc_utils.help(window)
 
             snake.move(direction)
 

@@ -61,13 +61,13 @@ and waits for a keypress
         window.addstr(int(start_y + i), start_x, line.center(line_length))
 
     window.addstr(int(start_y + snake_num_lines) + 2, 1,
-        'T E R M I N A L'.center(line_length))
+                  'T E R M I N A L'.center(line_length))
 
     window.addstr(int(start_y + snake_num_lines) + 3, 1,
-        'W O R M'.center(line_length))
+                  'W O R M'.center(line_length))
 
     window.addstr(int(start_y + snake_num_lines + 5), 1,
-        '(press any key to start)'.center(line_length))
+                  '(press any key to start)'.center(line_length))
 
     # The two lines below are chock full of a magic numbers.
     # Here's a little explanation:

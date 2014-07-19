@@ -34,8 +34,8 @@ Puts a titlebar in stdscreen
     # Lastly, we add the 'titlebar'
     titlebar = 'Terminal Worm (\'?\' for help)%sScore = 0  '
     titlebar_len = len(titlebar % (''))
-    stdscreen.addstr(0, 0,
-        titlebar % (' ' * (constants.WINWIDTH - titlebar_len - 1)))
+    stdscreen.addstr(0, 0, titlebar % (
+                     ' ' * (constants.WINWIDTH - titlebar_len - 1)))
 
 
 def display_score(score, stdscreen):

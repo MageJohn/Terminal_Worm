@@ -98,7 +98,7 @@ Returns a random position in win, that is not in exclude_list
     '''
     while True:
         random_pos = [random.randrange(1, win.getmaxyx()[0] - 1),
-                    random.randrange(1, win.getmaxyx()[1] - 1)]
+                      random.randrange(1, win.getmaxyx()[1] - 1)]
         if random_pos in exclude_list:
             continue
         else:

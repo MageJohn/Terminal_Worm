@@ -46,15 +46,15 @@ UP = 'up'
 DOWN = 'down'
 
 ADJUSTMAP = {
-    LEFT:  [ 0, -1],
-    RIGHT: [ 0,  1],
-    UP:    [-1,  0],
-    DOWN:  [ 1,  0]
+    LEFT:  [ 0, -1],  # noqa
+    RIGHT: [ 0,  1],  # noqa
+    UP:    [-1,  0],  # noqa
+    DOWN:  [ 1,  0]   # noqa
 }
 
 # NB: For configuration purposes, only things
 #     below here should need to be changed
-#============================================
+# ============================================
 
 
 APPLECHR = 'O'
@@ -64,7 +64,7 @@ WINHEIGHT = 20
 WINWIDTH = 60
 
 assert WINHEIGHT % 2 == 0 and WINWIDTH % 2 == 0, (
-       'Window height and window width need to be even numbers')
+    'Window height and window width need to be even numbers')
 # This makes life easier, because then we can do things
 # like halve the window size and still end up with whole numbers
 
@@ -80,15 +80,16 @@ assert (INITPOS[1] - INITLENGTH > 0 and
         INITPOS[1] < WINWIDTH and
         INITPOS[0] > 0 and
         INITPOS[0] < WINHEIGHT), (
-        'The snake needs to start in the window! '
-        'Remember, the snake is not in the window if '
-        'INITPOS - INITLENGTH goes outside the window')
+    'The snake needs to start in the window! '
+    'Remember, the snake is not in the window if '
+    'INITPOS - INITLENGTH goes outside the window')
 
 # Intial speed, in milliseconds
 INITSPEED = 150
 
-WALL_KILL = False  # Set to True if you want running into walls to mean
-                   # Game Over.
+# Set to True if you want running into walls to mean
+# Game Over.
+WALL_KILL = False
 
 CONTROL_KEYS = {LEFT: 'h', DOWN: 'j', UP: 'k', RIGHT: 'l'}
 # While the arrow keys will always be available, you can set up an

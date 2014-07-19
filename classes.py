@@ -49,7 +49,7 @@ Sets self.pos_list to a new snake data structure
 Used by __init__
         '''
         self.pos_list = [[head_pos[0], (head_pos[1] - (i + 1))]
-                          for i in range(length - 1)]
+                         for i in range(length - 1)]
         self.pos_list.insert(0, head_pos)
 
     def move(self, d):
@@ -179,7 +179,7 @@ else returns False
         # The reason this is here now is because an early version
         # of the game had walls with WALLCHR.
 
-        #if window.inch(
+        # if window.inch(
         #        self.pos_list[0][0],
         #        self.pos_list[0][1]) == ord(constants.WALLCHR):
         #    return True
@@ -199,7 +199,7 @@ the apple.
     '''
     def __init__(self, snake, bug, window):
             pos_exclude_list = snake.pos_list[:]
-            if bug != None:
+            if bug is not None:
                 pos_exclude_list.append(bug.pos)
             self.pos = misc_utils.get_random_pos(window, pos_exclude_list)
 
@@ -230,7 +230,7 @@ It's methods are:
     def display_timer(self, stdscr):
         '''Shows the timer in the statusbar'''
         stdscr.addstr(constants.BUG_TIMER_POS[0], constants.BUG_TIMER_POS[1],
-            '%s %s ' % (self.bug_chr, self.timeout))
+                      '%s %s ' % (self.bug_chr, self.timeout))
 
     def remove(self, window, stdscr, no_window_overwrite=False):
         '''Removes the bug and the counter.
@@ -240,5 +240,5 @@ head of the snake overwritten '''
         if not no_window_overwrite:
             window.addstr(self.pos[0], self.pos[1], ' ')
 
-        stdscr.addstr(constants.BUG_TIMER_POS[0], constants.BUG_TIMER_POS[1],
-            '    ')
+        stdscr.addstr(constants.BUG_TIMER_POS[0],
+                      constants.BUG_TIMER_POS[1], '    ')

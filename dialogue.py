@@ -103,27 +103,28 @@ Currently having only hotkeys, and no menu items, isn't supported.
 
     body_text = text[1].split('\n')
 
-    #--------------------
+    # --------------------
     # Now for initial variable setup
 
     win_height, win_width = window.getmaxyx()
     win_start_y, win_start_x = window.getbegyx()
 
     width = int((win_width * 70) / 100)  # 70% of the window
-    height = len(body_text) + len(answer_map) + 5  # 1 line of padding
-                                                   # around the text.
+
+    # 1 line of padding around the text.
+    height = len(body_text) + len(answer_map) + 5
 
     start_y = int(((win_height - height) / 2) + win_start_y)
     start_x = int(((win_width - width) / 2) + win_start_x)
 
-    #--------------------
+    # --------------------
     # Now we set up the menu object
 
     menu = Menu()
     for item in answer_map[1:]:
         menu.add_item(item[0], item[1])
 
-    #-----------------
+    # -----------------
     # That done, now we do the setup the dialogue box.
 
     dialogue = curses.newwin(height, width, start_y, start_x)
@@ -133,7 +134,7 @@ Currently having only hotkeys, and no menu items, isn't supported.
 
     dialogue_title = text[0].center(width - 2, '-')
     dialogue.addstr(0, 0, ''.join(['+', dialogue_title, '+']),
-        curses.A_REVERSE | curses.A_BOLD)
+                    curses.A_REVERSE | curses.A_BOLD)
 
     for i, s in enumerate(body_text, 2):
         dialogue.addstr(i, 1, s.center(width - 2))
@@ -143,7 +144,7 @@ Currently having only hotkeys, and no menu items, isn't supported.
 
     dialogue.refresh()
 
-    #---------------------------
+    # ---------------------------
     # Display of the dialog box dealt with, time for the input.
 
     window.nodelay(0)
@@ -159,7 +160,7 @@ Currently having only hotkeys, and no menu items, isn't supported.
             selection = menu.get_current()
             break
         else:
-            menu.has_changed == False
+            menu.has_changed is False
 
         for key in answer_map[0].keys():
             if c == key or c == ord(key):
@@ -172,7 +173,7 @@ Currently having only hotkeys, and no menu items, isn't supported.
         dialogue.refresh()
     window.nodelay(1)
 
-    #------------------------
+    # ------------------------
     # Cleanup and return
 
     del dialogue
@@ -188,9 +189,9 @@ def test(stdscr):
 
 if __name__ == '__main__':
     answer = curses.wrapper(test)
-    if answer == True:
+    if answer is True:
         print('You replied Yes')
-    elif answer == False:
+    elif answer is False:
         print('You replied No')
     elif answer == None:
         print('You exited')
