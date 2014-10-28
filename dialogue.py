@@ -193,5 +193,5 @@ if __name__ == '__main__':
         print('You replied Yes')
     elif answer is False:
         print('You replied No')
-    elif answer == None:
+    elif answer is None:
         print('You exited')

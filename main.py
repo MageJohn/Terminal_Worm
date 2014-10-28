@@ -34,7 +34,9 @@ from constants import RIGHT, LEFT, UP, DOWN, CONTROL_KEYS
 
 
 def main(stdscreen):
-    '''The main function. This is where things happen!'''
+    '''The main function. This is where things happen!
+    It\'s seperated into a function so it can be called
+    by curses.wrapper'''
     window = curses.newwin(WINHEIGHT, WINWIDTH, 1, 0)
 
     curses.curs_set(0)  # Invisible cursor
@@ -145,6 +147,8 @@ def main(stdscreen):
             break
 
 curses.wrapper(main)
+# curses.wrapper handles the program. Without it if there was an error and
+# the program exited unexpectedly, then the terminal would be left in an all
+# unusable state.
 
-# curses.wrapper cleans up for us, so all that's left to do is:
 print('See you soon!')

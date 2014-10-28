@@ -65,7 +65,7 @@ You got %s point%s!
 
     while True:
         answer = dialogue(window, ['G A M E  O V E R', dialogue_text],
-            [{}, ['Play again', 'playagain'], ['Exit', 'quit']])
+                          [{}, ['Play again', 'playagain'], ['Exit', 'quit']])
 
         if answer == 'quit':
             if confirm_quit(window):
