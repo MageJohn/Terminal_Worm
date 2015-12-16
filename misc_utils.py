@@ -31,6 +31,7 @@ from constants import INITSPEED, CONTROL_KEYS
 from constants import UP, DOWN, LEFT, RIGHT
 from dialogue import dialogue
 
+
 def get_char(window):
     '''Gets a char out of the queue,
        and then empties it. This stops the
