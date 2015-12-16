@@ -138,7 +138,9 @@ def main(stdscreen):
         if char == ord('q') or not flow_control.play_again(score, window):
             break
 
-curses.wrapper(main)
 
-# curses.wrapper cleans up for us, so all that's left to do is:
-print('See you soon!')
+if __name__ == '__main__':
+    curses.wrapper(main)
+
+    # curses.wrapper cleans up for us, so all that's left to do is:
+    print('See you soon!')
